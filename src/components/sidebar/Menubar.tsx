@@ -2,7 +2,12 @@ import {BookOpen, Images, MessageSquare, Settings} from 'lucide-react'
 import Avatar from '../Avatar'
 import { useAuthContext } from '../../context/AuthContext'
 import Tooltip from '../Tooltip'
-const Menubar = ({setActiveTab,activeTab}) => {
+interface MenubarProps {
+  setActiveTab: (tab: string) => void;
+  activeTab: string;
+}
+
+const Menubar: React.FC<MenubarProps> = ({ setActiveTab, activeTab }) => {
     const {authUser} = useAuthContext()
     console.log(authUser)
   return (

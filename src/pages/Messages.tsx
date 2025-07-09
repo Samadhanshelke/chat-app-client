@@ -3,10 +3,17 @@ import { useEffect, useState } from 'react';
 import { UserServices } from '../services/UserServices';
 import { connectSocket } from '../services/Socket';
 
+// Define the shape of a User object
+interface User {
+  _id: string;
+  userName?: string;
+  // Add more fields here if your user has more properties
+}
 
 const Messages = () => {
-  const [users, setUsers] = useState([]);
-  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
+const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
+
 
 
   useEffect(() => {
