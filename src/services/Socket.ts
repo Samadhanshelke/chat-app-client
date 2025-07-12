@@ -5,7 +5,7 @@ import { TokenService } from './TokenServices';
 export const connectSocket = () => {
   const token = TokenService.getAccessToken(); // Your method to get the token
 
-  return io('http://localhost:5000', {
+  return io(import.meta.env.VITE_API_SOCKET_URL, {
     auth: { token },
     withCredentials: true,
   });
