@@ -5,7 +5,8 @@ import SignIn from "./pages/SignIn";
 import ToastContainer from "./components/Toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
-
+import { MessageProvider } from "./context/MessageContext";
+import Test from './pages/Test'
 function App() {
   return (
     <div>
@@ -14,10 +15,14 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <Home />
+                  <MessageProvider>
+
+                    <Home />
+                  </MessageProvider>
             </ProtectedRoute>
           }
         />
+        <Route path="/test" element={<Test />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
       </Routes>

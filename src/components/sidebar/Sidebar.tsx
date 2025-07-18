@@ -2,8 +2,11 @@ import { useState } from "react"
 import Menubar from "./Menubar"
 import Profile from "../Profile"
 import Messages from "../../pages/Messages"
+interface Props {
+  onSelectUser: (userId: string, userName?: string,profile?:string) => void;
+}
 
-const Sidebar = () => {
+const Sidebar: React.FC<Props> = ({ onSelectUser }) => {
   const [activeTab,setActiveTab] = useState('messages')
   return (
     <div className="w-full flex h-full bg-[#111b21]">
@@ -15,7 +18,7 @@ const Sidebar = () => {
             activeTab === 'profile' && <Profile/>
            }
            {
-            activeTab === 'messages' && <Messages/>
+            activeTab === 'messages' && <Messages onSelectUser={onSelectUser} />
            }
          </div>
     </div>

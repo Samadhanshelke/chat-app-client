@@ -1,52 +1,24 @@
-// pages/AllUsers.js
-import { useEffect, useState } from 'react';
-import { UserServices } from '../services/UserServices';
-import { connectSocket } from '../services/Socket';
+import { useMessage } from "../context/MessageContext";
 
-// Define the shape of a User object
-interface User {
-  _id: string;
-  userName?: string;
-  // Add more fields here if your user has more properties
+interface Props {
+  onSelectUser: (userId: string, userName?: string,profile?:string) => void;
 }
 
-const Messages = () => {
-  const [users, setUsers] = useState<User[]>([]);
-const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
-
-
-
-  useEffect(() => {
-    // Fetch all users
-    const fetchUsers = async () => {
-      const response = await UserServices.getAllUsers();
-      console.log(response); // log the response from the backend
-      setUsers(response.users);
-    };
-
-    fetchUsers();
-
-    // Set up the socket connection
-    const socket = connectSocket();
-
-    socket.on('online-users', (online) => {
-      setOnlineUsers(online); // update the online users list
-      console.log(online)
-    });
-
-    // Cleanup: disconnect the socket on component unmount
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
+const Messages: React.FC<Props> = ({ onSelectUser }) => {
+const {users,onlineUsers} = useMessage()
+console.log(users)
   return (
-    <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-semibold">All Users</h1>
-      <ul className="space-y-2">
+ <div className=" p-4">
+      <h2 className="text-xl font-bold mb-4 w-full whitespace-nowrap">Chat Connect</h2>
+      <ul className="space-y-2 w-full">
         {users.map(user => (
-          <li key={user._id} className="flex items-center space-x-2">
-            <span>{user.userName || 'unknown'}</span>
+          <li
+            key={user._id}
+            onClick={() => onSelectUser(user._id, user.name,user.profilePicture)}
+            className="cursor-pointer hover:bg-gray-800 w-full p-2 rounded-lg flex items-center gap-2"
+          >
+            <img src={user.profilePicture} alt="" className="rounded-full h-8 w-8"/>
+            {user.name || 'Unknown'}{' '}
             {onlineUsers.includes(user._id) && (
               <span className="text-green-500 text-sm">(Online)</span>
             )}

@@ -84,25 +84,25 @@ const SignIn = () => {
       setAuthError(error.message);
     }
   };
-  const [count,setCount] = useState(0)
-  const handleShowToast = ()=>{
-    toast.success(`Logged in successfully! ${count}`);
-    setCount(count + 1)
-  }
-  const handleShowToast2 = ()=>{
-    toast.error(`Logged in successfully! ${count}`);
-    setCount(count + 1)
-  }
-  const handleAction = async () => {
-    const id = toast.loading("Processing...");
+  // const [count,setCount] = useState(0)
+  // const handleShowToast = ()=>{
+  //   toast.success(`Logged in successfully! ${count}`);
+  //   setCount(count + 1)
+  // }
+  // const handleShowToast2 = ()=>{
+  //   toast.error(`Logged in successfully! ${count}`);
+  //   setCount(count + 1)
+  // }
+  // const handleAction = async () => {
+  //   const id = toast.loading("Processing...");
   
-    try {
-      await new Promise((res) => setTimeout(res, 10000));
-      toast.update(id, "success", "Action completed!");
-    } catch (err) {
-      toast.update(id, "error", "Something went wrong");
-    }
-  };
+  //   try {
+  //     await new Promise((res) => setTimeout(res, 10000));
+  //     toast.update(id, "success", "Action completed!");
+  //   } catch (err) {
+  //     toast.update(id, "error", "Something went wrong");
+  //   }
+  // };
 
   return (
     <div className="w-full h-screen flex">
@@ -178,9 +178,9 @@ const SignIn = () => {
               Sign up
             </Link>
           </span>
-          <button onClick={handleShowToast}>Show Toast1</button>
+          {/* <button onClick={handleShowToast}>Show Toast1</button>
           <button onClick={handleShowToast2}>Show Toast2</button>
-          <button onClick={handleAction}>Show Toast3</button>
+          <button onClick={handleAction}>Show Toast3</button> */}
         </div>
       </div>
     </div>
